@@ -16,6 +16,8 @@
 #include <string>
 using namespace std;
 
+static const char *str_hosttype[] = { "host ipv4", "host ipv6", "host domain", NULL };
+
 typedef enum
 {
    HOST_IPV4,
@@ -46,19 +48,21 @@ typedef struct _url_field
 class AdUrlParser
 {
 public:
-   AdUrlParser();
-   ~AdUrlParser();
+    AdUrlParser();
+    ~AdUrlParser();
+    void ParserClean();
+    void UrlParser(const char *str);
+    void QueryParser(char *query);
 
-   void UrlParser(const char *url);
-   void QueryParser(char *query);
+    void QueryParameterPrint();
+    void AdUrlPrint();
 
-   void QueryParameterPrint();
-
-   bool getQueryParameter(const string & strName, string & strVal);
+    bool getQueryParameter(const string & strName, string & strVal);
 private:
-   int host_is_ipv4(char *str);
-   char *mystrndup(const char *str, int n);
-   url_field_t* url;
+    int host_is_ipv4(char *str);
+    char *mystrndup(const char *str, int n);
+    
+    url_field_t* url;
 
 };
 
